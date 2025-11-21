@@ -1,14 +1,16 @@
+ACCEPT Department;
+
 DECLARE
    v_department EMPLOYEE.DEPARTMENT%TYPE := '&Department';
 
    CURSOR emp_cur
     IS
-        SELECT EMP_ID, EMP_NAME, SALARY, JOINING_DATE
+        SELECT *
         FROM EMPLOYEE
         WHERE DEPARTMENT = v_department;
 
 
-    emp_row EMPLOYEE%ROWTYPE;
+    emp_row emp_cur%ROWTYPE;
 
     v_count NUMBER := 0;
 
@@ -20,11 +22,7 @@ BEGIN
     OPEN emp_cur;
 
     LOOP
-        FETCH emp_cur INTO 
-            emp_row.emp_id,
-            emp_row.emp_name,
-            emp_row.salary,
-            emp_row.joining_date;
+        FETCH emp_cur INTO emp_row;
 
         EXIT WHEN emp_cur%NOTFOUND;
 
@@ -34,6 +32,7 @@ BEGIN
     END LOOP;
 
     CLOSE emp_cur;
+
 
 
     IF v_count=0 THEN
