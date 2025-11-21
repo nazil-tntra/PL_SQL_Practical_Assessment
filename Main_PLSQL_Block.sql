@@ -28,6 +28,17 @@ BEGIN
 
     END LOOP;
 
+    CLOSE emp_cur;
+
+
+    DBMS_OUTPUT.PUT_LINE('----------------------------------------');
+
+    DBMS_OUTPUT.PUT_LINE(
+        'Total Salary for ' || 
+        v_department || ' : ' ||
+        GET_TOTAL_SALARY(v_department)
+    );
+
  
 END;
 /
